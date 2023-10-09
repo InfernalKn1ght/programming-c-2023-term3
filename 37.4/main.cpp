@@ -12,32 +12,21 @@ void sort(int *arr, int n) {
         }
     }
 
-    int *arrBuf = new int[n];
+    int max = 0;
     for (int i = 0; i < n; ++i) {
-        arrBuf[i] = arr[i];
+        max = std::max(max, arr[i]);
     }
-    int counter = 0;
 
-    while (counter != n) {
-        counter = 0;
+    int l = 0;
+    while (max != 0) {
         for (int i = 0; i < n; ++i) {
-            if (arrBuf[i] == 0) ++counter;
-            matrix[arrBuf[i] % 10][i] = arr[i];
-            arrBuf[i] /= 10;
-        }
-
-        if (counter == n) break;
-
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                std::cout << matrix[i][j] << " ";
+            int temp = arr[i];
+            for (int j = 0; j < l; ++j) {
+                temp /=10;
             }
-            std::cout << '\n';
+            matrix[temp % 10][i] = arr[i];
         }
-        std::cout << '\n';
-
-        int k = 0;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0, k = 0; i < 10; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (matrix[i][j] != -1) {
                     arr[k] = matrix[i][j];
@@ -51,17 +40,24 @@ void sort(int *arr, int n) {
                 matrix[i][j] = -1;
             }
         }
+        max /= 10;
+        ++l;
     }
+
+    for (int i = 0; i < 10; ++i) {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
 }
 
 int main(int argc, char *argv[]) {
     srand(time(0));
 
-    int n = 10;
+    int n = 20;
     int *arr = new int[n];
 
     for (int i = 0; i < n; ++i) {
-        arr[i] = rand() % 100;
+        arr[i] = rand() % 10000;
     }
 
     for (int i = 0; i < n; ++i) {
@@ -74,6 +70,8 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; ++i) {
         std::cout << arr[i] << " ";
     }
+
+    delete[] arr;
 
     return EXIT_SUCCESS;
 }
