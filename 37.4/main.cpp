@@ -53,7 +53,7 @@ void sort(int *arr, int n) {
 int main(int argc, char *argv[]) {
     srand(time(0));
 
-    int n = 20;
+    int n = 1000;
     int *arr = new int[n];
 
     for (int i = 0; i < n; ++i) {

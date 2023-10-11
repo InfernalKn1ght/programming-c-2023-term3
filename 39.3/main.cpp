@@ -29,14 +29,29 @@ void quickSort(int *arr, int head, int tail) {
     }
 }
 
+int search(int *arr, int start, int end, int n) {
+    if (start <= end) {
+        int num = n * (end - start) / (arr[end] - arr[start]);
+        int middle = start + (end - start) / 2;
+        if (n > num) {
+            return search(arr, middle + 1, end, n);
+        } else if (n < num) {
+            return search(arr, start, middle, n);
+        } else {
+            return middle;
+        }
+    }
+    else return -1;
+}
+
 int main(int argc, char *argv[]) {
     srand(time(0));
 
-    int n = 1000;
+    int n = 20;
     int *arr = new int[n];
 
     for (int i = 0; i < n; ++i) {
-        arr[i] = rand() % 10000;
+        arr[i] = rand() % 10;
     }
 
     for (int i = 0; i < n; ++i) {
@@ -49,6 +64,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; ++i) {
         std::cout << arr[i] << " ";
     }
+    std::cout << "\n" << search(arr, 0, n - 1, 4);
 
     delete[] arr;
 

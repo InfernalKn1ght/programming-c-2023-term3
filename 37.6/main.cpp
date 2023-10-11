@@ -40,7 +40,7 @@ int *mergeSort(int *arr, int start, int end) {
 
         return merge(left, right, middle - start + 1, end - middle);
     } else {
-        int *x = new int;
+        int *x = new int[1];
         *x = arr[start];
         return x;
     }
@@ -49,11 +49,11 @@ int *mergeSort(int *arr, int start, int end) {
 int main(int argc, char *argv[]) {
     srand(time(0));
 
-    int n = 30;
+    int n = 1000;
     int *arr = new int[n];
 
     for (int i = 0; i < n; ++i) {
-        arr[i] = rand() % 1000;
+        arr[i] = rand() % 10000;
     }
 
     for (int i = 0; i < n; ++i) {
