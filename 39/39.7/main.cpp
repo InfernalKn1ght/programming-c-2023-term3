@@ -29,19 +29,23 @@ void quickSort(int *arr, int head, int tail) {
     }
 }
 
-int search(int *arr, int start, int end, int n) {
+int binSearch(int *arr, int start, int end, int x) {
     if (start <= end) {
-        int num = n * (end - start) / (arr[end] - arr[start]);
         int middle = start + (end - start) / 2;
-        if (n > num) {
-            return search(arr, middle + 1, end, n);
-        } else if (n < num) {
-            return search(arr, start, middle, n);
+        if (x > arr[middle]) {
+            return binSearch(arr, middle + 1, end, x);
+        } else if (x < arr[middle]) {
+            return binSearch(arr, start, middle - 1, x);
         } else {
-            return middle;
+            if (middle > 0 && arr[middle - 1] == x) {
+                return binSearch(arr, start, middle - 1, x);
+            } else {
+                return middle;
+            }
         }
+    } else {
+        return -1;
     }
-    else return -1;
 }
 
 int main(int argc, char *argv[]) {
@@ -64,7 +68,8 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < n; ++i) {
         std::cout << arr[i] << " ";
     }
-    std::cout << "\n" << search(arr, 0, n - 1, 4);
+    std::cout << "\n"
+              << binSearch(arr, 0, n - 1, 5);
 
     delete[] arr;
 
