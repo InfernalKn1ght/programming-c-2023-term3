@@ -82,7 +82,7 @@ int linSearch(int *arr, int size, int x) {
 int main(int argc, char *argv[]) {
     srand(time(0));
 
-    int n = 10000;
+    int n = 1000000;
     int *arr = new int[n];
 
     for (int i = 0; i < n; ++i) {
@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
     }
 
     clock_t start = clock();
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 100000; ++i) {
         int index = rand() % n;
         linSearch(arr, n, arr[index]);
     }
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
     quickSort(arr, 0, n - 1);
 
     start = clock();
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 100000; ++i) {
         int index = rand() % n;
         binSearch(arr, 0, n - 1, arr[index]);
     }
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
     std::cout << "binary seacrh, array is sorted | time: " << seconds << "\n";
 
     start = clock();
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 100000; ++i) {
         int index = rand() % n;
         interpolationSearch(arr, n, arr[index]);
     }
